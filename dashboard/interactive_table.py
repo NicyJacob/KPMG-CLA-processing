@@ -7,7 +7,7 @@ cla_df = pd.read_csv(
    # "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv"
    "./csv_data/final.csv"
 )
-cla_df2 = cla_df[['jc_number', 'cla_title_en', 'label', 'royal_decree_date', 'Themes', 'Sub_Themes.1', 'toepassing', 'loon', 'duur', 'Summary']]
+cla_df2 = cla_df[['jc_number','Themes', 'Sub_Themes.1', 'cla_title_en', 'label', 'royal_decree_date',  'toepassing', 'loon', 'duur', 'Summary']]
 # iris = pd.read_csv(
 #     #"https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv"
 #     "./csv_data/final.csv"
