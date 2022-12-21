@@ -1,6 +1,7 @@
 # KPMG---CLA-processing
 The objective of the project is to extract relevant information from CLA documents using available meta-data and artificial intelligence(NLP). The information is to be presented in a structured way so that it can be integrated into existing platforms or a new reporting tool of the client.
 
+
 # Description
 The project is divided into 4 steps represented in the folder structure of this repository. 
 1. Document Classification - CLA can be classified into different types based on its theme. This is the exploratory stage of this project. It identifies the top 4 themes in the CLAs provided. 
@@ -15,33 +16,35 @@ The project is divided into 4 steps represented in the folder structure of this 
 # Getting Started
 Dependencies
 Libraries needed before installing program.
-PyPDF2
-nltk
-heapq
-sumy.summarizers.luhn
-Streamlite
+1.PyPDF2
+2.nltk
+3.heapq
+4.sumy
+5.streamlit
 
 Executing program
-How to run the program
+How to run the program step-by-step.
 1. pdf_classifier.ipynb
-2. pdf_splitter.ipynb <Check the name>
+2. vert_pdf_splitter.ipynb
 3. Summarization.ipynb
 4. Erratum_finder.ipynb
 5. getting_text.ipynb
-6. Dashboard <Check the name>
+6. Interactive_CLA_finder.py
+
+Output
+<Dashboard screenshot>
 
 
-#Authors
-Contributors names and contact info
-
-ex. Dominique Pizzie
-ex. @DomPizzie
+#License
+Free license
 
 
-Initial Release
-License
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
+#Contact
+Samuel Fooks: samuel.fooks@gmail.com
+Nicy Jacob: nicy.ck@gmail.com
 
-Acknowledgments
-Inspiration, code snippets, etc.
+
+#Acknowledgments
+BeCode Arai4 AI coaches(Chrysanthi and Louis)
+
 
