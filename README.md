@@ -16,11 +16,11 @@ The project is divided into 4 steps represented in the folder structure of this 
 # Getting Started
 Dependencies
 Libraries needed before installing program.
-PyPDF2
-nltk
-heapq
-sumy
-streamlit
+1. PyPDF2
+2. nltk
+3. heapq
+4. sumy
+5. streamlit
 
 Executing program
 How to run the program step-by-step.
