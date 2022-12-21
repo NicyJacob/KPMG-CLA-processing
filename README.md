@@ -35,16 +35,18 @@ Output
 <Dashboard screenshot>
 
 
-#License
+# License
+  
 Free license
 
 
-#Contact
+# Contact
 Samuel Fooks: samuel.fooks@gmail.com
+  
 Nicy Jacob: nicy.ck@gmail.com
 
 
-#Acknowledgments
+# Acknowledgments
 BeCode Arai4 AI coaches(Chrysanthi and Louis)
 
 
