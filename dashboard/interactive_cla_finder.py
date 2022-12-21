@@ -38,21 +38,30 @@ start_ts = now - 3 * 30 * 24 * 60 * 60
 #     )
 #     return df.sort_values("timestamp").drop("timestamp", axis=1)
 
-cla_df = pd.read_csv(
+df = pd.read_csv(
    # "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv"
    "./csv_data/final.csv"
    #"./dashboard/csv_data/final.csv"
 )
-
+pd.set_option('display.max_colwidth', -1)
 def make_link(filename):
     link_base = 'https://public-search.werk.belgie.be/website-download-service/joint-work-convention/'
     JC_num=str(filename)[0:3] + '/'
     full_link = link_base + str(JC_num)+ str(filename)
     return full_link
 
-cla_df2 = cla_df[['jc_number','Themes', 'Sub_Themes.1', 'royal_decree_date',  'toepassing', 'loon', 'duur', 'filename', 'Summary']]
-cla_df2['link'] = cla_df2.apply(lambda x : make_link(x['filename']), axis=1 )
-# an example based on https://www.ag-grid.com/javascript-data-grid/component-cell-renderer/#simple-cell-renderer-example
+df = df[['jc_number','Themes', 'Sub_Themes.1', 'royal_decree_date',  'toepassing', 'loon', 'duur', 'filename', 'Summary']]
+df['link'] = df.apply(lambda x : make_link(x['filename']), axis=1 )
+
+def make_clickable(link):
+    # target _blank to open new window
+    # extract clickable text to display for your link
+    text = link[-10:]
+    return f'<a target="_blank" href="{link}">{text}</a>'
+   # return st.markdown(f'<a href="{url}" rel="noopener noreferrer" target="_blank">{name}</a>',unsafe_allow_html=True)
+
+df['hyperlink'] = df.apply(lambda x : make_clickable(x['link']), axis=1)
+
 BtnCellRenderer1 = JsCode('''
 class BtnCellRenderer {
     init(params) {
@@ -136,7 +145,6 @@ class BtnCellRenderer {
 };
 ''')
 
-df = cla_df2
 gb = GridOptionsBuilder.from_dataframe(df, enableRowGroup=True, enableValue=True, enablePivot=True)
 gb.configure_default_column(editable=True)
 gb.configure_column(field='jc_number', header_name='JC Number', supressSizeToFit = 'false')
@@ -174,7 +182,7 @@ grid_options['columnDefs'].append({
 )
 
 st.title("Interactive CLA Finder")
-
+df['hyperlink'] = df['hyperlink'].to_html(escape=False)
 response = AgGrid(df,
                   theme="streamlit",
                   key='table1',
@@ -189,21 +197,24 @@ response = AgGrid(df,
                   )
 summary_cell = response['data']['Summary']
 #st.write(summary_cell)
+
 try:
-    st.write(summary_cell[response['data'].clicked == 'clicked'])
+    st.write(summary_cell[response['data'].clicked == 'clicked'], unsafe_allow_html=True)
 except:
     st.write('Summary Below')
 #extra code
 #if (confirm('Are you sure you want to CLICK?') == true) {
 #     }
 #function to display the PDF of a given file 
-def displayPDF(file):
-    # Opening file from file path. this is used to open the file from a website rather than local
-    with urllib.request.urlopen(file) as f:
-        base64_pdf = base64.b64encode(f.read()).decode('utf-8')
 
-    # Embedding PDF in HTML
-    pdf_display = F'<iframe src="data:application/pdf;base64,{base64_pdf}" width="700" height="950" type="application/pdf"></iframe>'
 
-    # Displaying File
-    st.markdown(pdf_display, unsafe_allow_html=True)
+# def displayPDF(file):
+#     # Opening file from file path. this is used to open the file from a website rather than local
+#     with urllib.request.urlopen(file) as f:
+#         base64_pdf = base64.b64encode(f.read()).decode('utf-8')
+
+#     # Embedding PDF in HTML
+#     pdf_display = F'<iframe src="data:application/pdf;base64,{base64_pdf}" width="700" height="950" type="application/pdf"></iframe>'
+
+#     # Displaying File
+#     st.markdown(pdf_display, unsafe_allow_html=True)
