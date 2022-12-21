@@ -32,7 +32,8 @@ How to run the program step-by-step.
 6. Interactive_CLA_finder.py
 
 Output
-<Dashboard screenshot>
+![image](https://user-images.githubusercontent.com/113432231/208945417-75bc5e12-fa6d-448d-8d30-470345ec685b.png)
+
 
 
 # License
