@@ -31,7 +31,8 @@ class BtnCellRenderer {
          <span>
             <button id='click-button' 
                 class='btn-simple' 
-                style='color: ${this.params.color}; background-color: ${this.params.background_color}'>Summarize</button>
+                style='color: ${this.params.color}; 
+                background-color: ${this.params.background_color}'>Summarize</button>
          </span>
       `;
         this.eButton = this.eGui.querySelector('#click-button');
@@ -51,7 +52,8 @@ class BtnCellRenderer {
     }
     btnClickedHandler(event) {
         if(this.params.getValue() == 'clicked') {
-            this.refreshTable('');
+            this.refreshTable('by');
+            
         } else {
             this.refreshTable('clicked');
         }
@@ -60,25 +62,27 @@ class BtnCellRenderer {
         }
     refreshTable(value) {
         this.params.setValue(value);
+        
     }
 };
 ''')
 
 gb = GridOptionsBuilder.from_dataframe(df, enableRowGroup=True, enableValue=True, enablePivot=True)
 gb.configure_default_column(editable=True, surpressSizeToFit= 'false')
-gb.configure_column(field='jc_number', header_name='JC Number', supressSizeToFit = 'false')
-gb.configure_column(field = 'Themes', header_name='Theme', surpressSizeToFit = 'false')
-gb.configure_column(field = 'Sub_Themes.1', header_name='Sub Theme', surpressSizeToFit = 'false')
-gb.configure_column(field = 'filename', header_name='File', surpressSizeToFit='false')
-gb.configure_column(field = 'deposit_date', header_name= 'Deposit Date', surpressSizeToFit='false')
+gb.configure_column(field='jc_number', header_name='JC Number', suppressSizeToFit = 'false')
+gb.configure_column(field = 'Themes', header_name='Theme', suppressSizeToFit = 'false')
+gb.configure_column(field = 'Sub_Themes.1', header_name='Sub Theme', suppressSizeToFit = 'false')
+gb.configure_column(field = 'filename', header_name='File', susppressSizeToFit='false')
+gb.configure_column(field = 'deposit_date', header_name= 'Deposit Date', suppressSizeToFit='false')
+gb.configure_column(field = 'validity_date', header_name='Valid Until', suppressSizeToFit='false')
 gb.configure_column(field = 'Summary', width = 400)
 gb.configure_columns(column_names = ['toepassing', 'Summary', 'filename', 'loon', 'premie', 'Werkgever', 'werkloosheid', 'bonus', 'ERRATUM'], hide = 'true' )
-gb.configure_column(field='toepassing', header_name='Scope')
-gb.configure_column(field='loon', header_name='Salary')
-gb.configure_column(field='premie', header_name='Premiums')
-gb.configure_column(field='Werkgever', header_name='Employer')
-gb.configure_column(field='werkloosheid', header_name='Unemployment')
-gb.configure_column(field='ERRATUM', header_name='Correction' )
+# gb.configure_column(field='toepassing', header_name='Scope')
+# gb.configure_column(field='loon', header_name='Salary')
+# gb.configure_column(field='premie', header_name='Premiums')
+# gb.configure_column(field='Werkgever', header_name='Employer')
+# gb.configure_column(field='werkloosheid', header_name='Unemployment')
+# gb.configure_column(field='ERRATUM', header_name='Correction' )
 
 gb.configure_side_bar()
 gb.configure_selection(header_checkbox=True)
@@ -116,14 +120,15 @@ summary_cell = response['data']['Summary']
 summary_container = st.empty()
 
 try:
-    #summary_string = summary_cell[response['data'].clicked == 'clicked'].values[summary_cell.index[0]]
-    summary_string = summary_cell[response['data'].clicked == 'clicked']
-    summary_container.write(summary_string, unsafe_allow_html=True)
-    
+    summary_cell[response['data'].clicked == 'clicked'].values[summary_cell.index[0]]
+    #
+    #summary_container.write(summary_string, unsafe_allow_html=True)
+    #summary_string = summary_cell[response['data'].clicked == 'clicked']
     btn = st.button("Empty")
 
     if btn:
         #response['data']['Summary'] = 
-        summary_container.write(" ")
+        summary_cell[response['data'].clicked == 'clicked']
+        #summary_container.write(" ")
 except:
     pass
