@@ -10,7 +10,7 @@ The project is divided into 4 steps represented in the folder structure of this 
 
 3. Info Extraction - The split pdf is converted into text. This text is used to extract the summary, erratums and sentences with the keywords respectively. The output of extraction is added to the metadata (EXCEL file). The output is stored into a csv file(final.csv).
 
-4. Insights - The csv file from Info extraction is used to build the dashboard using Power BI / Streamlite.
+4. Insights - The csv file from Info extraction is used to build the dashboard using Streamlit.
 
 
 # Getting Started
