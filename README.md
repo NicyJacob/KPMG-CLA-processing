@@ -10,7 +10,7 @@ The project is divided into 4 steps represented in the folder structure of this 
 
 3. Info Extraction - The split pdf is converted into text. This text is used to extract the summary, erratums and sentences with the keywords respectively. The output of extraction is added to the metadata (EXCEL file). The output is stored into a csv file(final.csv).
 
-4. Insights - The csv file from Info extraction is used to build the dashboard using Streamlit.
+4. Dashboard - The csv file from Info extraction is used to build the dashboard using Streamlit.
 
 
 # Getting Started
@@ -36,6 +36,8 @@ Output
 ![image](https://user-images.githubusercontent.com/113432231/208945417-75bc5e12-fa6d-448d-8d30-470345ec685b.png)
 
 
+Next Steps
+The project can be enhanced using Topic Modelling to enable clustering of the CLAs. A scrapper can be built to scrape CLAs periodically to update the metadata file. This will ensure that the metadata is always updated with the CLAs published. 
 
 # License
   
