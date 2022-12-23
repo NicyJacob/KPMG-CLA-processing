@@ -8,19 +8,23 @@ from st_aggrid import AgGrid, GridOptionsBuilder, JsCode,GridUpdateMode
 now = int(datetime.datetime.now().timestamp())
 start_ts = now - 3 * 30 * 24 * 60 * 60
 
-df = pd.read_csv(
-   # "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv"
-   "./csv_data/final2.csv"
-   #"./dashboard/csv_data/final2.csv"
-)
+@st.cache(allow_output_mutation=True)
+def data_get():
+    df = pd.read_csv(
+    # "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv"
+    "./csv_data/final2.csv"
+    #"./dashboard/csv_data/final2.csv"
+    
+    )
+    return df
 #pd.set_option('display.max_colwidth', -1)
 def make_link(filename):
     link_base = 'https://public-search.werk.belgie.be/website-download-service/joint-work-convention/'
     JC_num=str(filename)[0:3] + '/'
     full_link = link_base + str(JC_num)+ str(filename)
     return full_link
-
-df = df[['jc_number','Themes', 'Sub_Themes.1', 'validity_date', 'deposit_date', 'toepassing', 'loon', 'premie', 'Werkgever', 'werkloosheid', 'bonus', 'ERRATUM', 'filename', 'Summary']]
+df = data_get()
+df = df[['jc_number','Themes', 'Sub_Themes.1', 'validity_date', 'deposit_date', 'toepassing', 'loon', 'premie', 'Werkgever', 'werkloosheid', 'bonus', 'ERRATUM', 'filename', 'prev_cla_no', 'Summary']]
 
 BtnCellRenderer1 = JsCode('''
 class BtnCellRenderer {
@@ -72,11 +76,12 @@ gb.configure_default_column(editable=True, surpressSizeToFit= 'false')
 gb.configure_column(field='jc_number', header_name='JC Number', suppressSizeToFit = 'false')
 gb.configure_column(field = 'Themes', header_name='Theme', suppressSizeToFit = 'false')
 gb.configure_column(field = 'Sub_Themes.1', header_name='Sub Theme', suppressSizeToFit = 'false')
-gb.configure_column(field = 'filename', header_name='File', susppressSizeToFit='false')
+gb.configure_column(field = 'filename', header_name='File', width = 350, susppressSizeToFit='false')
 gb.configure_column(field = 'deposit_date', header_name= 'Deposit Date', suppressSizeToFit='false')
 gb.configure_column(field = 'validity_date', header_name='Valid Until', suppressSizeToFit='false')
+gb.configure_column(field = 'prev_cla_no', header_name='Previous CLA', suppressSizeToFit='false')
 gb.configure_column(field = 'Summary', width = 400)
-gb.configure_columns(column_names = ['toepassing', 'Summary', 'filename', 'loon', 'premie', 'Werkgever', 'werkloosheid', 'bonus', 'ERRATUM'], hide = 'true' )
+gb.configure_columns(column_names = ['toepassing', 'Summary', 'loon', 'premie', 'Werkgever', 'werkloosheid', 'bonus', 'ERRATUM', 'prev_cla_no'], hide = 'true' )
 # gb.configure_column(field='toepassing', header_name='Scope')
 # gb.configure_column(field='loon', header_name='Salary')
 # gb.configure_column(field='premie', header_name='Premiums')
@@ -91,16 +96,17 @@ grid_options = gb.build()
 grid_options['columnDefs'].append({
     #field = column header
     "field": "clicked",
-    "header": "Summarize",
+    "header": "Clicked",
     "cellRenderer": BtnCellRenderer1,
     "cellRendererParams": {
         "color": "black",
         "background_color": "white",
+        
     }
 }
 )
 
-st.title("Interactive CLA Finder")
+st.title("CLA Explore")
 # df['hyperlink'] = df['hyperlink'].to_html(escape=False)
 response = AgGrid(df,
                   theme="streamlit",
@@ -121,14 +127,16 @@ summary_container = st.empty()
 
 try:
     summary_cell[response['data'].clicked == 'clicked'].values[summary_cell.index[0]]
-    #
+    #begin work on making erase button to erase filled in cell
+    #table stays when summary button is clicked, must be clicked again to erase for new value
+    #need either alternate clicker or same button use to alter state
     #summary_container.write(summary_string, unsafe_allow_html=True)
     #summary_string = summary_cell[response['data'].clicked == 'clicked']
-    btn = st.button("Empty")
+    # btn = st.button("Empty")
 
-    if btn:
-        #response['data']['Summary'] = 
-        summary_cell[response['data'].clicked == 'clicked']
-        #summary_container.write(" ")
+    # if btn:
+    #     #response['data']['Summary'] = 
+    #     summary_cell[response['data'].clicked == 'clicked']
+    #     #summary_container.write(" ")
 except:
     pass
