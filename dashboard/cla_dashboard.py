@@ -1,3 +1,9 @@
+#streamlit based dashboard for showing information from a given csv
+#the csv file contains information about each CLA document produced from
+#metadata as well as a summary generated from an NLP document processing
+#pipeline.  Refinements for a faster deployable version, and other
+#features are still a work in progress
+
 import datetime
 import numpy as np
 import pandas as pd
@@ -8,6 +14,7 @@ from st_aggrid import AgGrid, GridOptionsBuilder, JsCode,GridUpdateMode
 now = int(datetime.datetime.now().timestamp())
 start_ts = now - 3 * 30 * 24 * 60 * 60
 
+#try implementing caching function to speed up app
 @st.cache(allow_output_mutation=True)
 def data_get():
     df = pd.read_csv(
