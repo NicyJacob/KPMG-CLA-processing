@@ -1,26 +1,26 @@
-# KPMG---CLA-processing
-The objective of the project is to extract relevant information from CLA documents using available meta-data and artificial intelligence(NLP). The information is to be presented in a structured way so that it can be integrated into existing platforms or a new reporting tool of the client.
-
+# KPMG-CLA-processing
+The aim of the project is to utilize artificial intelligence and available metadata to extract crucial information from CLA documents, and present it in a structured format for seamless integration into the client's existing platforms or a new reporting tool. This approach leverages NLP technology to streamline the process and provide accurate, actionable insights.
 
 # Description
-The project is divided into 4 steps represented in the folder structure of this repository. 
-1. Document Classification - CLA can be classified into different types based on its theme. This is the exploratory stage of this project. It identifies the top 4 themes in the CLAs provided. 
+The project is divided into four distinct stages, which are reflected in the folder structure of the repository. These stages are:
 
-2. PDF Splitter - CLA provide are in pdf format and contained 2 languages (Dutch and French). The pdf has to be split based on language into different pdfs.
+Document Classification: In this stage, the CLA documents are classified into different categories based on their themes. Through an exploratory process, the top four themes are identified among the provided CLAs.
 
-3. Info Extraction - The split pdf is converted into text. This text is used to extract the summary, erratums and sentences with the keywords respectively. The output of extraction is added to the metadata (EXCEL file). The output is stored into a csv file(final.csv).
+PDF Splitting: The CLA documents are provided in PDF format and contain both Dutch and French languages. This stage involves splitting the PDFs into separate files based on language.
 
-4. Dashboard - The csv file from Info extraction is used to build the dashboard using Streamlit.
+Information Extraction: The split PDFs are converted into text, from which key information such as the summary, erratums, and sentences containing specific keywords is extracted. This information is then added to the metadata in an Excel file and stored in a CSV file (final.csv).
+
+Dashboard: The final.csv file from the information extraction stage is used to build a dashboard using Streamlit.
 
 
 # Getting Started
-Dependencies
-Libraries needed before installing program.
-1. PyPDF2
-2. nltk
-3. heapq
-4. sumy
-5. streamlit
+Dependencies needed before running the program.
+    
+        pip install PyPDF2
+        pip install nltk
+        pip install sumy
+        pip install streamlit
+        pip install heapq
 
 Executing program
 How to run the program step-by-step.
@@ -31,13 +31,13 @@ How to run the program step-by-step.
 5. getting_text.ipynb
 6. Interactive_CLA_finder.py
 
-Output
+# Output
 
 ![image](https://user-images.githubusercontent.com/113432231/208945417-75bc5e12-fa6d-448d-8d30-470345ec685b.png)
 
 
-Next Steps
-The project can be enhanced using Topic Modelling to enable clustering of the CLAs. A scrapper can be built to scrape CLAs periodically to update the metadata file. This will ensure that the metadata is always updated with the CLAs published. 
+# Next Steps
+The project has the potential for further improvement through the implementation of topic modeling techniques to cluster the CLA documents. Additionally, a scrapper can be developed to periodically scrape new CLA documents and update the metadata file, ensuring that it is always current with the latest published CLAs. These enhancements will enhance the functionality and usefulness of the project, providing more in-depth insights into the data.
 
 # License
   
@@ -51,6 +51,6 @@ Nicy Jacob: nicy.ck@gmail.com
 
 
 # Acknowledgments
-BeCode Arai4 AI coaches(Chrysanthi and Louis)
+BeCode Arai4 AI coaches (Chrysanthi and Louis)
 
 
